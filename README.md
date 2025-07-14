@@ -141,7 +141,6 @@ Image Upload → OCR → Classification → Entity Extraction → Vector Storage
 - **Entity Extractor** (`extractor.py`): Multi-layered entity extraction
   - **Regex patterns** for document-specific entities
   - **HuggingFace NER** (BERT-based) for general entities
-  - **NLTK processing** with spell correction for noisy OCR
   - **Domain mapping** to convert generic entities to document-specific fields
 
 #### 3. **Vector Database** (`chroma_client.py`)
@@ -160,7 +159,6 @@ Image Upload → OCR → Classification → Entity Extraction → Vector Storage
 #### **Why Multi-layered Entity Extraction?**
 - **Regex**: Fast, domain-specific patterns (names, dates, codes)
 - **BERT NER**: General entity recognition with high accuracy
-- **NLTK**: Spell correction for noisy OCR text
 - **Fallback system**: Ensures entities are always extracted
 
 #### **Why ChromaDB?**
@@ -195,7 +193,6 @@ Image Upload → OCR → Classification → Entity Extraction → Vector Storage
 
 - **Backend**: Django, Django REST Framework
 - **OCR**: Tesseract, OpenCV
-- **ML**: scikit-learn, Transformers, NLTK
 - **Vector DB**: ChromaDB
 - **Documentation**: Swagger/OpenAPI (drf-yasg)
 

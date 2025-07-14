@@ -9,7 +9,7 @@ from documents.preprocessing import clean_text
 logger = logging.getLogger(__name__)
 
 # 🖼️ OCR Text Extraction with Caching (Improved)
-def extract_text_from_image(image_path: str, cache_dir="/app/ocr-cache", debug_dir=None) -> str:
+def extract_text_from_image(image_path: str, cache_dir=None, debug_dir=None) -> str:
     """
     🖼️ Extract text from an image using Tesseract OCR (with caching and enhanced preprocessing).
 
@@ -26,6 +26,8 @@ def extract_text_from_image(image_path: str, cache_dir="/app/ocr-cache", debug_d
         logger.error(f"❌ Image not found: {image_path}")
         raise FileNotFoundError(f"Image not found: {image_path}")
 
+    if cache_dir is None:
+        cache_dir = os.environ.get('OCR_CACHE_DIR', '/app/ocr-cache')
     os.makedirs(cache_dir, exist_ok=True)
     filename = os.path.basename(image_path)
     cache_path = os.path.join(cache_dir, filename + ".txt")

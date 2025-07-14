@@ -15,6 +15,7 @@ jobs:
       DJANGO_SECRET_KEY: test-secret-key-for-ci
       DEBUG: True
       ALLOWED_HOSTS: "*"
+      OCR_CACHE_DIR: /tmp/ocr-cache
 
     steps:
     - uses: actions/checkout@v4
