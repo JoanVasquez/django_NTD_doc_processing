@@ -52,46 +52,48 @@ ENTITY_MAPPING = {
     "resume":        {"PER": "candidate_name",  "ORG": "company",       "LOC": "location"},
     "scientific_publication": {"PER": "author",  "ORG": "institution", "LOC": "research_location"},
     "scientific_report":      {"PER": "researcher", "ORG": "institution", "LOC": "report_location"},
-    "specification":{"ORG": "issuing_organization", "MISC": "specification_id"}
+    "specification": {"ORG": "issuing_organization", "MISC": "specification_id"}
 }
+
 
 def extract_entities(document_type: str, content: str) -> Dict[str, List[str]]:
     """
     🏷️ Extract entities using lightweight regex patterns.
     """
     logger.info(f"Starting extraction for: {document_type}")
-    
+
     entities = {}
-    
+
     # Extract names
     names = []
     for pattern in NAME_PATTERNS:
         names.extend(re.findall(pattern, content))
     if names:
         entities['PER'] = list(set(names))[:5]
-    
+
     # Extract organizations
     orgs = []
     for pattern in ORG_PATTERNS:
         orgs.extend(re.findall(pattern, content, re.IGNORECASE))
     if orgs:
         entities['ORG'] = list(set(orgs))[:5]
-    
+
     # Extract locations
     locs = []
     for pattern in LOC_PATTERNS:
         locs.extend(re.findall(pattern, content))
     if locs:
         entities['LOC'] = list(set(locs))[:5]
-    
+
     # Extract miscellaneous
     misc = []
     for pattern in MISC_PATTERNS:
         misc.extend(re.findall(pattern, content))
     if misc:
         entities['MISC'] = list(set(misc))[:10]
-    
+
     return _apply_mapping(entities, document_type)
+
 
 def _apply_mapping(entities: Dict[str, List[str]], document_type: str) -> Dict[str, List[str]]:
     """

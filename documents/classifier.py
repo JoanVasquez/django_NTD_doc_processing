@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 def load_documents_from_folders(base_path: str = "docs-sm") -> Tuple[List[str], List[str]]:
     """
     📥 Load documents for training.
-    
+
     Each subfolder represents a document label. Supported files: PNG, JPG, JPEG.
 
     Args:
@@ -70,7 +70,7 @@ def load_documents_from_folders(base_path: str = "docs-sm") -> Tuple[List[str], 
 def train_and_save_model(output_path: str = "model.joblib") -> None:
     """
     🏋️ Train a document classification model and save it to disk.
-    
+
     Args:
         output_path (str): Destination file for saving the trained model.
     """
@@ -95,7 +95,7 @@ def train_and_save_model(output_path: str = "model.joblib") -> None:
     logger.info("📊 Evaluating model...")
     predictions = pipeline.predict(X_test)
     report = classification_report(y_test, predictions)
-    logger.info(f"\n📋 Classification Report:\n{report}")
+    logger.info(f"\n📋 Classification Report: \n{report}")
 
     joblib.dump(pipeline, output_path)
     logger.info(f"💾 Model saved to: {output_path}")

@@ -12,6 +12,7 @@ from documents.extractor import extract_entities
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)
 
+
 class Command(BaseCommand):
     """
     📁 Batch process an entire dataset folder:

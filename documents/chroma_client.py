@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List
 
 import chromadb
 from chromadb.utils import embedding_functions
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 # 💾 Persistent ChromaDB Client
-client = chromadb.PersistentClient(path="./chroma_db")  # Data stored in /chroma_db folder
+client = chromadb.PersistentClient(path="./chroma_db")
 
 
 # 🧠 Embedding Function (using SentenceTransformers)
@@ -33,7 +33,7 @@ collection = client.get_or_create_collection(
 def store_document_in_chromadb(doc_id: str, text: str, document_type: str, entities: Dict[str, List[str]]) -> None:
     """
     📝 Store document embedding and metadata in ChromaDB.
-    
+
     Args:
         doc_id (str): Unique document identifier.
         text (str): Full document text.

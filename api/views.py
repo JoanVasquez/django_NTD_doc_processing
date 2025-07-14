@@ -20,7 +20,6 @@ from documents.ocr import extract_text_from_image
 logger = logging.getLogger(__name__)
 
 
-
 def clean_text_preview(text: str, max_length: int = 200) -> str:
     """Generate a readable preview from OCR text, skipping garbage."""
     print(text)
@@ -48,7 +47,6 @@ def clean_text_preview(text: str, max_length: int = 200) -> str:
         return "[OCR text quality too poor for preview]"
 
     return preview
-
 
 
 class DocumentProcessView(APIView):
@@ -142,5 +140,5 @@ class DocumentProcessView(APIView):
             logger.error(f"Error processing uploaded document: {e}", exc_info=True)
             return Response(
                 {'error': 'Internal server error while processing document.'},
-                            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-                            )
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

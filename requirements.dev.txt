@@ -14,3 +14,4 @@ types-Pillow      # Type stubs for Pillow
 flake8            # Code linting
 isort             # Import sorting
 flake8-isort      # Flake8 plugin for isort
+pre-commit        # Git pre-commit hooks

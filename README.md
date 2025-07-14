@@ -134,6 +134,21 @@ python -m isort api documents doc_processor
 python -m flake8 api documents doc_processor
 ```
 
+### Pre-commit Hooks
+
+Setup automatic code quality checks on commit:
+
+```bash
+# Install pre-commit hooks
+python setup_precommit.py
+
+# Or manually
+pre-commit install
+
+# Run hooks on all files
+pre-commit run --all-files
+```
+
 ### Adding New Document Types
 
 1. Add training data to `docs-sm/new_type/`

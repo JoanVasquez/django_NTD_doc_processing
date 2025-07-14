@@ -13,6 +13,8 @@ from documents.preprocessing import clean_text
 logger = logging.getLogger(__name__)
 
 # 🖼️ OCR Text Extraction with Caching (Improved)
+
+
 def extract_text_from_image(image_path: str, cache_dir: Optional[str] = None, debug_dir: Optional[str] = None) -> str:
     """
     🖼️ Extract text from an image using Tesseract OCR (with caching and enhanced preprocessing).
