@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.5.1
+    hooks:
+      - id: mypy
+        additional_dependencies: [
+          django-stubs,
+          djangorestframework-stubs,
+          types-requests,
+          types-Pillow
+        ]
+        args: [--strict]
+        files: ^(api|documents|doc_processor)/.*\.py$

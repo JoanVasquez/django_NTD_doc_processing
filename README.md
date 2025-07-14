@@ -104,6 +104,21 @@ pip install -r requirements.txt
 pip install -r requirements.dev.txt
 ```
 
+### Type Checking
+
+This project enforces strict typing with mypy:
+
+```bash
+# Run type checking
+python run_type_check.py
+
+# Or directly with mypy
+python -m mypy api documents doc_processor
+
+# Install type checking dependencies
+pip install -r requirements.dev.txt
+```
+
 ### Adding New Document Types
 
 1. Add training data to `docs-sm/new_type/`

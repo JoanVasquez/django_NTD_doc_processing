@@ -1,6 +1,9 @@
 # 🌐 URL Configuration for doc_processor project
 
-from django.urls import path, include
+from __future__ import annotations
+
+from typing import List
+from django.urls import path, include, URLPattern
 from django.shortcuts import redirect
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view

@@ -1,8 +1,12 @@
 # 📦 ChromaDB Client Setup & Utilities
 
+from __future__ import annotations
+
+import logging
+from typing import Dict, List, Any, Union
+
 import chromadb
 from chromadb.utils import embedding_functions
-import logging
 
 
 # 🛠️ Logger Setup (for ChromaDB interactions)
@@ -27,7 +31,7 @@ collection = client.get_or_create_collection(
 
 
 # 📥 Store Document in ChromaDB
-def store_document_in_chromadb(doc_id: str, text: str, document_type: str, entities: dict):
+def store_document_in_chromadb(doc_id: str, text: str, document_type: str, entities: Dict[str, List[str]]) -> None:
     """
     📝 Store document embedding and metadata in ChromaDB.
     
@@ -66,7 +70,7 @@ def store_document_in_chromadb(doc_id: str, text: str, document_type: str, entit
 
 
 # 🔍 Query Similar Documents
-def query_similar_documents(query_text: str, top_k=5):
+def query_similar_documents(query_text: str, top_k: int = 5) -> Dict[str, Any]:
     """
     🔎 Search for similar documents using embedding similarity.
 

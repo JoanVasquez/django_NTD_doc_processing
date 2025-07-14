@@ -1,8 +1,11 @@
 # 🧠 Lightweight Entity Extraction Module
 # Uses regex patterns for fast entity detection
 
+from __future__ import annotations
+
 import logging
 import re
+from typing import Dict, List, Any
 
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)
@@ -52,7 +55,7 @@ ENTITY_MAPPING = {
     "specification":{"ORG": "issuing_organization", "MISC": "specification_id"}
 }
 
-def extract_entities(document_type: str, content: str) -> dict:
+def extract_entities(document_type: str, content: str) -> Dict[str, List[str]]:
     """
     🏷️ Extract entities using lightweight regex patterns.
     """
@@ -90,7 +93,7 @@ def extract_entities(document_type: str, content: str) -> dict:
     
     return _apply_mapping(entities, document_type)
 
-def _apply_mapping(entities: dict, document_type: str) -> dict:
+def _apply_mapping(entities: Dict[str, List[str]], document_type: str) -> Dict[str, List[str]]:
     """
     🗺️ Map raw tags (PER/ORG/LOC/MISC) to domain-specific field names.
     """

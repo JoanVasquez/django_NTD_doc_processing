@@ -1,9 +1,12 @@
 # 📄 Document Classification Module (Training & Prediction)
 
+from __future__ import annotations
+
 import os
 import logging
-import joblib
+from typing import Tuple, List
 
+import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
@@ -18,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 # 📂 Load Documents from Folder Structure
-def load_documents_from_folders(base_path="docs-sm"):
+def load_documents_from_folders(base_path: str = "docs-sm") -> Tuple[List[str], List[str]]:
     """
     📥 Load documents for training.
     
@@ -65,7 +68,7 @@ def load_documents_from_folders(base_path="docs-sm"):
 
 
 # 🤖 Train Classifier & Save Model
-def train_and_save_model(output_path="model.joblib"):
+def train_and_save_model(output_path: str = "model.joblib") -> None:
     """
     🏋️ Train a document classification model and save it to disk.
     
@@ -101,7 +104,7 @@ def train_and_save_model(output_path="model.joblib"):
 
 
 # 🔮 Predict Document Type
-def predict_document_type(text, model_path="model.joblib"):
+def predict_document_type(text: str, model_path: str = "model.joblib") -> str:
     """
     🔮 Predict the type of a document using the trained model.
 

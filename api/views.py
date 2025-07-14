@@ -1,12 +1,17 @@
+from __future__ import annotations
+
 import logging
 import uuid
+from typing import Any
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+
 from documents.ocr import extract_text_from_image
 from documents.classifier import predict_document_type
 from documents.extractor import extract_entities
@@ -78,7 +83,7 @@ class DocumentProcessView(APIView):
             500: "Internal server error"
         }
     )
-    def post(self, request):
+    def post(self, request: Request) -> Response:
         file = request.FILES.get('file')
 
         if not file:

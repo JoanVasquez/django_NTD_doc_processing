@@ -1,4 +1,7 @@
-from django.urls import path
+from __future__ import annotations
+
+from typing import List
+from django.urls import path, URLPattern
 from api.views import DocumentProcessView
 
 urlpatterns = [

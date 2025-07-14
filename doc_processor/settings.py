@@ -1,6 +1,9 @@
 # ⚙️ Django Settings for doc_processor project
 
+from __future__ import annotations
+
 import os
+from typing import List, Dict, Any
 from dotenv import load_dotenv
 from pathlib import Path
 

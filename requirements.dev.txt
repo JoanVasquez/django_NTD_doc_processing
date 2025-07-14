@@ -2,3 +2,11 @@
 pytest            # Core testing framework
 pytest-django     # Django integration for pytest
 pytest-cov        # Coverage reporting with pytest
+
+# 🔍 Type Checking
+mypy              # Static type checker
+django-stubs      # Django type stubs
+djangorestframework-stubs  # DRF type stubs
+mypy-django-plugin # Django-specific mypy plugin
+types-requests    # Type stubs for requests
+types-Pillow      # Type stubs for Pillow
