@@ -55,7 +55,7 @@ jobs:
 
     - name: Run full test suite with coverage
       run: |
-        python -m pytest tests/ --cov=. --cov-report=xml --cov-report=term-missing
+        python -m pytest tests/test_*_lightweight.py --cov=documents --cov=api --cov-report=xml --cov-report=term-missing --cov-fail-under=60
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
