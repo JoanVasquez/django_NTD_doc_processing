@@ -1,0 +1,28 @@
+# 📦 Core Framework
+Django>=5.0
+
+# 🖼️ OCR Dependencies
+pytesseract         # Text extraction from images using Tesseract OCR
+opencv-python       # Image processing (OpenCV library)
+
+# 🧠 Vector Database
+chromadb            # Embedding storage and similarity search
+
+# ⚙️ Environment Variables
+python-dotenv       # Load .env configuration files
+
+# 🤖 Machine Learning & NLP
+scikit-learn        # Classifier and vectorization (TF-IDF, LogisticRegression)
+joblib              # Model serialization
+transformers        # Hugging Face Transformers for NER (BERT)
+torch               # Backend framework required by Transformers
+sentence-transformers  # Sentence embeddings for ChromaDB
+
+# 🌐 API Support
+djangorestframework # Django REST Framework for API creation
+drf-yasg            # Swagger/OpenAPI documentation
+
+# 🚀 Production WSGI Server
+gunicorn            # Production-grade WSGI HTTP server for Django
+
+nltk

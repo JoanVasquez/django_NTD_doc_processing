@@ -1,0 +1,4 @@
+# 🧪 Testing Frameworks
+pytest            # Core testing framework
+pytest-django     # Django integration for pytest
+pytest-cov        # Coverage reporting with pytest

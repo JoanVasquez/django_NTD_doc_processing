@@ -1,0 +1,42 @@
+# 📦 Docker Compose: Django OCR Document Processor + ChromaDB
+
+services:
+  # 🌐 Django Web Service
+  web:
+    build: .                              # Build image from local Dockerfile
+    container_name: doc_processor_web
+    volumes:
+      - ./docs-sm:/app/docs-sm:ro         # 🔍 Dataset folder (read-only)
+      - ./chroma_db:/app/chroma_db        # 🗄️ Local ChromaDB storage
+    ports:
+      - "8000:8000"                       # 🌐 Expose Django on host
+    env_file:
+      - .env                              # Load additional environment variables
+    environment:
+      - CHROMA_DB_HOST=chromadb           # ChromaDB service reference
+      - CHROMA_DB_PORT=8000
+    depends_on:
+      - chromadb                          # Simple dependency without health check
+    restart: unless-stopped               # Auto-restart container unless manually stopped
+    networks:
+      - doc_processor_network
+
+  # 📊 ChromaDB Vector Database
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: doc_processor_chromadb
+    ports:
+      - "8001:8000"                       # Expose ChromaDB on host at port 8001
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+      - ALLOW_RESET=TRUE
+
+    restart: unless-stopped
+    networks:
+      - doc_processor_network
+
+# 🌐 Network Definition
+networks:
+  doc_processor_network:
+    driver: bridge
