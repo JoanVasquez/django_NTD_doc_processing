@@ -1,10 +1,12 @@
-import pytest
 import json
-from unittest.mock import patch, MagicMock
-from django.test import TestCase
+from unittest.mock import MagicMock, patch
+
+import pytest
 from django.core.files.uploadedfile import SimpleUploadedFile
-from rest_framework.test import APIClient
+from django.test import TestCase
 from rest_framework import status
+from rest_framework.test import APIClient
+
 
 class TestLightweightAPI(TestCase):
     
@@ -200,7 +202,7 @@ class TestLightweightAPI(TestCase):
     def test_clean_text_preview_function(self):
         """Test the clean_text_preview utility function"""
         from api.views import clean_text_preview
-        
+
         # Test normal text
         result = clean_text_preview("This is a normal text with good words")
         assert "This" in result and "normal" in result

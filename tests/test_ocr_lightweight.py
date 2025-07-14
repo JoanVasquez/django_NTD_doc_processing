@@ -1,8 +1,11 @@
-import pytest
 import os
-from unittest.mock import patch, mock_open, MagicMock
+from unittest.mock import MagicMock, mock_open, patch
+
+import pytest
 from PIL import Image
+
 from documents.ocr import extract_text_from_image
+
 
 class TestLightweightOCR:
     

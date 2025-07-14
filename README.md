@@ -119,6 +119,21 @@ python -m mypy api documents doc_processor
 pip install -r requirements.dev.txt
 ```
 
+### Code Quality
+
+Code linting and import sorting:
+
+```bash
+# Run all code quality checks
+python run_lint.py
+
+# Fix import sorting
+python -m isort api documents doc_processor
+
+# Run linting only
+python -m flake8 api documents doc_processor
+```
+
 ### Adding New Document Types
 
 1. Add training data to `docs-sm/new_type/`

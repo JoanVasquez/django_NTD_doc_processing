@@ -1,5 +1,7 @@
 import pytest
-from documents.extractor import extract_entities, _apply_mapping
+
+from documents.extractor import _apply_mapping, extract_entities
+
 
 class TestLightweightExtractor:
     

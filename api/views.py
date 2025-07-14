@@ -2,23 +2,24 @@ from __future__ import annotations
 
 import logging
 import uuid
-from typing import Any
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.request import Request
-from rest_framework import status
-from rest_framework.parsers import MultiPartParser, FormParser
-from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status
+from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from documents.ocr import extract_text_from_image
+from documents.chroma_client import store_document_in_chromadb
 from documents.classifier import predict_document_type
 from documents.extractor import extract_entities
-from documents.chroma_client import store_document_in_chromadb
+from documents.ocr import extract_text_from_image
 
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)
+
+
 
 def clean_text_preview(text: str, max_length: int = 200) -> str:
     """Generate a readable preview from OCR text, skipping garbage."""
@@ -48,6 +49,8 @@ def clean_text_preview(text: str, max_length: int = 200) -> str:
 
     return preview
 
+
+
 class DocumentProcessView(APIView):
     """
     API endpoint to upload a document, extract its type + entities, and store in ChromaDB.
@@ -55,7 +58,9 @@ class DocumentProcessView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     @swagger_auto_schema(
-        operation_description="Process document: OCR, classify type, extract entities",
+        operation_description=(
+            "Process document: OCR, classify type, extract entities"
+        ),
         manual_parameters=[
             openapi.Parameter(
                 'file',
@@ -135,5 +140,7 @@ class DocumentProcessView(APIView):
 
         except Exception as e:
             logger.error(f"Error processing uploaded document: {e}", exc_info=True)
-            return Response({'error': 'Internal server error while processing document.'},
-                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {'error': 'Internal server error while processing document.'},
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                            )

@@ -1,6 +1,9 @@
+from unittest.mock import MagicMock, patch
+
 from django.test import TestCase
-from unittest.mock import patch, MagicMock
+
 from documents.classifier import predict_document_type, train_and_save_model
+
 
 class ClassifierCoverageTest(TestCase):
     @patch('documents.classifier.joblib.load')

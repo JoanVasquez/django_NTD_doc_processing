@@ -2,19 +2,18 @@
 
 from __future__ import annotations
 
-import os
 import logging
-from typing import Tuple, List
+import os
+from typing import List, Tuple
 
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
 
 from documents.ocr import extract_text_from_image
-
 
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)

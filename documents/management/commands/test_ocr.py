@@ -1,11 +1,11 @@
 # 🛠️ Django Management Command: Batch OCR Test for Images in /docs-sm
 
-import os
 import logging
+import os
 
 from django.core.management.base import BaseCommand
-from documents.ocr import extract_text_from_image
 
+from documents.ocr import extract_text_from_image
 
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)

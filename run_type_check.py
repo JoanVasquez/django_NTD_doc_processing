@@ -5,6 +5,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+
 def check_dependencies() -> bool:
     """Check if required type checking dependencies are installed."""
     try:

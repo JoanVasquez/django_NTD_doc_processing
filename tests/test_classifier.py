@@ -1,13 +1,15 @@
 # 🧪 Unit Tests: Document Classifier (Loading, Training, Predicting)
 
+import os
+from unittest.mock import MagicMock, patch
+
 from django.test import TestCase
-from unittest.mock import patch, MagicMock
+
 from documents.classifier import (
     load_documents_from_folders,
+    predict_document_type,
     train_and_save_model,
-    predict_document_type
 )
-import os
 
 
 class DocumentClassifierMainFlowTest(TestCase):

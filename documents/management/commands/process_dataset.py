@@ -1,15 +1,15 @@
 # 📁 Django Management Command: Batch Process Dataset and Store in ChromaDB
 
+import logging
 import os
 import uuid
-import logging
 
 from django.core.management.base import BaseCommand
-from documents.ocr import extract_text_from_image
+
+from documents.chroma_client import store_document_in_chromadb
 from documents.classifier import predict_document_type
 from documents.extractor import extract_entities
-from documents.chroma_client import store_document_in_chromadb
-
+from documents.ocr import extract_text_from_image
 
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)

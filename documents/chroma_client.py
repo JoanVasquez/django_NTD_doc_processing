@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 import logging
-from typing import Dict, List, Any, Union
+from typing import Any, Dict, List, Union
 
 import chromadb
 from chromadb.utils import embedding_functions
-
 
 # 🛠️ Logger Setup (for ChromaDB interactions)
 logger = logging.getLogger(__name__)

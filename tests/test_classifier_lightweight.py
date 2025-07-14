@@ -1,6 +1,7 @@
-import pytest
 import sys
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+import pytest
 
 # Mock dependencies before import
 sklearn_mock = MagicMock()
@@ -19,7 +20,12 @@ sys.modules['sklearn.model_selection'] = sklearn_mock.model_selection
 sys.modules['sklearn.metrics'] = sklearn_mock.metrics
 sys.modules['joblib'] = MagicMock()
 
-from documents.classifier import load_documents_from_folders, train_and_save_model, predict_document_type
+from documents.classifier import (
+    load_documents_from_folders,
+    predict_document_type,
+    train_and_save_model,
+)
+
 
 class TestLightweightClassifier:
     

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import os
 import logging
+import os
 from typing import Optional
 
 import pytesseract
-from PIL import Image, ImageFilter, ImageEnhance
+from PIL import Image, ImageEnhance, ImageFilter
 
 from documents.preprocessing import clean_text
 

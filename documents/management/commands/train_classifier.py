@@ -1,9 +1,10 @@
 # 🤖 Django Management Command: Train Document Classifier
 
 import logging
-from django.core.management.base import BaseCommand
-from documents.classifier import train_and_save_model
 
+from django.core.management.base import BaseCommand
+
+from documents.classifier import train_and_save_model
 
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)

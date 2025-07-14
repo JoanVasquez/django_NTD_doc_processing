@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-import os
-from typing import List, Dict, Any
-from dotenv import load_dotenv
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 # 📂 Base Directory
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,6 +134,3 @@ STATIC_URL = "static/"
 
 # 🗝️ Default Primary Key Field Type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-

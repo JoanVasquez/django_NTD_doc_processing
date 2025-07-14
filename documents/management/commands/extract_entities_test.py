@@ -4,10 +4,10 @@ import json
 import logging
 
 from django.core.management.base import BaseCommand
-from documents.ocr import extract_text_from_image
+
 from documents.classifier import predict_document_type
 from documents.extractor import extract_entities
-
+from documents.ocr import extract_text_from_image
 
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)

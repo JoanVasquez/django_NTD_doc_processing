@@ -1,6 +1,9 @@
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
-from documents.chroma_client import store_document_in_chromadb, query_similar_documents
+
+from documents.chroma_client import query_similar_documents, store_document_in_chromadb
+
 
 class TestChromaClient:
     

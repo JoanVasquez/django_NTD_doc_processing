@@ -1,7 +1,10 @@
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
+
 from documents.classifier import load_documents_from_folders, train_and_save_model
 from documents.ocr import extract_text_from_image
+
 
 class TestCoverageBoost:
     """Additional tests to boost coverage to 90%"""
@@ -55,8 +58,8 @@ class TestCoverageBoost:
     
     def test_simple_storage_edge_cases(self):
         """Test simple storage edge cases"""
-        from documents.simple_storage import search_documents, load_documents
-        
+        from documents.simple_storage import load_documents, search_documents
+
         # Test search with empty query
         with patch('documents.simple_storage.load_documents', return_value={}):
             results = search_documents("")
@@ -74,7 +77,7 @@ class TestCoverageBoost:
     def test_extractor_pattern_coverage(self):
         """Test extractor patterns with specific cases"""
         from documents.extractor import extract_entities
-        
+
         # Test with text that matches multiple patterns
         complex_text = """
         Dear Dr. John A. Smith,
@@ -98,7 +101,7 @@ class TestCoverageBoost:
     def test_preprocessing_edge_cases(self):
         """Test preprocessing with edge cases"""
         from documents.preprocessing import clean_text
-        
+
         # Test with only whitespace
         result = clean_text("   \n\n\t\t   ")
         assert result == ""

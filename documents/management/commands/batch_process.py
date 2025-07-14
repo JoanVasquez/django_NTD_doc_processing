@@ -1,12 +1,13 @@
+import logging
 import os
 import uuid
-import logging
 
 from django.core.management.base import BaseCommand
+
 from documents.card_parser import extract_card_fields
+from documents.chroma_client import store_document_in_chromadb
 from documents.classifier import predict_document_type
 from documents.extractor import extract_entities
-from documents.chroma_client import store_document_in_chromadb
 
 # 🛠️ Logger Setup
 logger = logging.getLogger(__name__)

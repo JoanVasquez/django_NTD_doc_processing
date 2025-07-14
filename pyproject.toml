@@ -1,0 +1,7 @@
+[tool.isort]
+profile = "django"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["api", "documents", "doc_processor"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+skip = ["migrations", "chroma_db"]

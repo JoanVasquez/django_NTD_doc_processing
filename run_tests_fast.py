@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 """Fast test runner - runs only lightweight tests"""
 
+import os
 import subprocess
 import sys
-import os
+
 
 def run_fast_tests():
     """Run only lightweight, fast tests"""

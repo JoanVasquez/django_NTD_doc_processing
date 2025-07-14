@@ -1,6 +1,7 @@
-import pytest
 import sys
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+import pytest
 
 # Mock dependencies before import
 chromadb_mock = MagicMock()
@@ -11,7 +12,8 @@ sys.modules['chromadb.utils'] = chromadb_mock.utils
 sys.modules['chromadb.utils.embedding_functions'] = chromadb_mock.utils.embedding_functions
 sys.modules['sentence_transformers'] = MagicMock()
 
-from documents.chroma_client import store_document_in_chromadb, query_similar_documents
+from documents.chroma_client import query_similar_documents, store_document_in_chromadb
+
 
 class TestLightweightChroma:
     

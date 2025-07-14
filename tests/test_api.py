@@ -1,7 +1,8 @@
 # 🧪 API Integration Test: Document Processing Endpoint
 
-from django.test import TestCase, Client
 import os
+
+from django.test import Client, TestCase
 
 
 class DocumentProcessAPITest(TestCase):

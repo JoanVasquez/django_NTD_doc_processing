@@ -7,6 +7,10 @@ pytest-cov        # Coverage reporting with pytest
 mypy              # Static type checker
 django-stubs      # Django type stubs
 djangorestframework-stubs  # DRF type stubs
-mypy-django-plugin # Django-specific mypy plugin
 types-requests    # Type stubs for requests
 types-Pillow      # Type stubs for Pillow
+
+# 🧹 Code Quality
+flake8            # Code linting
+isort             # Import sorting
+flake8-isort      # Flake8 plugin for isort
