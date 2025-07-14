@@ -7,7 +7,6 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-
 from documents.ocr import extract_text_from_image
 from documents.classifier import predict_document_type
 from documents.extractor import extract_entities
@@ -51,42 +50,33 @@ class DocumentProcessView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     @swagger_auto_schema(
-        operation_description="Process a document image to extract text, classify document type, and extract entities",
-        operation_summary="Process Document",
-        request_body=openapi.Schema(
-            type=openapi.TYPE_OBJECT,
-            properties={
-                'file': openapi.Schema(
-                    type=openapi.TYPE_FILE,
-                    description='Document image file (PNG, JPG, JPEG)'
-                )
-            },
-            required=['file']
-        ),
+        operation_description="Process document: OCR, classify type, extract entities",
+        manual_parameters=[
+            openapi.Parameter(
+                'file',
+                openapi.IN_FORM,
+                description="Image file to process",
+                type=openapi.TYPE_FILE,
+                required=True
+            )
+        ],
         responses={
             200: openapi.Response(
                 description="Document processed successfully",
-                schema=openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        'document_id': openapi.Schema(type=openapi.TYPE_STRING, description='Unique document identifier'),
-                        'document_type': openapi.Schema(type=openapi.TYPE_STRING, description='Classified document type'),
-                        'entities': openapi.Schema(
-                            type=openapi.TYPE_OBJECT,
-                            description='Extracted entities based on document type',
-                            additional_properties=openapi.Schema(
-                                type=openapi.TYPE_ARRAY,
-                                items=openapi.Schema(type=openapi.TYPE_STRING)
-                            )
-                        )
+                examples={
+                    "application/json": {
+                        "document_id": "uuid-string",
+                        "document_type": "letter",
+                        "entities": {
+                            "names": ["John Doe"],
+                            "locations": ["New York, NY"]
+                        }
                     }
-                )
+                }
             ),
-            400: openapi.Response(description="Bad request - no file uploaded"),
-            500: openapi.Response(description="Internal server error")
-        },
-        consumes=['multipart/form-data'],
-        tags=['Document Processing']
+            400: "No file uploaded",
+            500: "Internal server error"
+        }
     )
     def post(self, request):
         file = request.FILES.get('file')
@@ -128,7 +118,7 @@ class DocumentProcessView(APIView):
                 entities=entities
             )
 
-            logger.info(f"Stored document {doc_id} in ChromaDB.")
+            logger.info(f"Stored document {doc_id} in storage.")
 
             result = {
                 "document_id": doc_id,

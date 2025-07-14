@@ -90,11 +90,18 @@ doc_processor/
 ### Running Tests
 
 ```bash
-# Local - Install test dependencies first
+# Fast tests (lightweight only) - Recommended for development
+python run_tests_fast.py
+
+# Or using pytest directly
+python -m pytest tests/test_*_lightweight.py -v --tb=short
+
+# Full test suite (slower - includes integration tests)
+python -m pytest tests/ --tb=short
+
+# Install test dependencies first
 pip install -r requirements.txt
 pip install -r requirements.dev.txt
-python -m pytest
-
 ```
 
 ### Adding New Document Types

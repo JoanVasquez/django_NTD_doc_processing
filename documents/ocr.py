@@ -1,5 +1,5 @@
 import pytesseract
-import cv2
+from PIL import Image, ImageFilter, ImageEnhance
 import os
 import logging
 
@@ -38,26 +38,26 @@ def extract_text_from_image(image_path: str, cache_dir="/app/ocr-cache", debug_d
 
     logger.info(f"⏳ OCR cache miss. Processing image: {image_path}")
 
-    # Read and preprocess image
-    image = cv2.imread(image_path)
-    if image is None:
-        logger.error(f"❌ Failed to read image: {image_path}")
+    # Read and preprocess image with Pillow
+    try:
+        image = Image.open(image_path)
+    except Exception as e:
+        logger.error(f"❌ Failed to read image: {image_path} - {e}")
         raise ValueError(f"Failed to read image: {image_path}")
 
-    # Convert to grayscale
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    # Reduce noise while keeping edges
-    gray = cv2.bilateralFilter(gray, 9, 75, 75)
-    # Adaptive threshold to binarize
-    gray = cv2.adaptiveThreshold(
-        gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 2
-    )
+    # Convert to grayscale and enhance
+    gray = image.convert('L')
+    # Enhance contrast
+    enhancer = ImageEnhance.Contrast(gray)
+    gray = enhancer.enhance(2.0)
+    # Apply filter to reduce noise
+    gray = gray.filter(ImageFilter.MedianFilter())
 
     # Save debug image if needed
     if debug_dir:
         os.makedirs(debug_dir, exist_ok=True)
         debug_path = os.path.join(debug_dir, filename)
-        cv2.imwrite(debug_path, gray)
+        gray.save(debug_path)
         logger.info(f"🐞 Saved debug preprocessed image: {debug_path}")
 
     # Tesseract config: LSTM engine + single column of text

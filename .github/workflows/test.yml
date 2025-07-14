@@ -2,13 +2,19 @@ name: Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    
+    env:
+      DJANGO_SETTINGS_MODULE: doc_processor.settings
+      DJANGO_SECRET_KEY: test-secret-key-for-ci
+      DEBUG: True
+      ALLOWED_HOSTS: "*"
 
     steps:
     - uses: actions/checkout@v4
@@ -24,9 +30,12 @@ jobs:
         sudo apt-get install -y \
           tesseract-ocr \
           tesseract-ocr-eng \
-          libgl1 \
-          libglx-mesa0 \
-          libglib2.0-0
+          libgl1-mesa-glx \
+          libglib2.0-0 \
+          libsm6 \
+          libxext6 \
+          libxrender-dev \
+          libgomp1
 
     - name: Install Python dependencies
       run: |
@@ -34,9 +43,17 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements.dev.txt
 
-    - name: Run tests
+    - name: Run Django migrations
       run: |
-        python -m pytest --cov=. --cov-report=xml
+        python manage.py migrate --run-syncdb
+
+    - name: Run fast tests
+      run: |
+        python run_tests_fast.py
+
+    - name: Run full test suite with coverage
+      run: |
+        python -m pytest tests/ --cov=. --cov-report=xml --cov-report=term-missing
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
