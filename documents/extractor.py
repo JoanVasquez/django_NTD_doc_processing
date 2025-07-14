@@ -35,19 +35,30 @@ word_list = set(words.words())
 logger = logging.getLogger(__name__)
 
 
-# 📦 Lazy-loaded NER Pipeline
+# 📦 Lazy-loaded NER Pipeline with auto-install
 ner_pipeline = None
 def get_ner_pipeline():
     """
-    ⚙️ Lazily initialize and return a HuggingFace NER pipeline.
+    ⚙️ Lazily initialize NER pipeline with auto-install for dev.
     """
     global ner_pipeline
     if ner_pipeline is None:
-        ner_pipeline = pipeline(
-            "token-classification",
-            model="dslim/bert-base-NER",
-            aggregation_strategy="simple"
-        )
+        try:
+            from transformers import pipeline
+            ner_pipeline = pipeline(
+                "token-classification",
+                model="dslim/bert-base-NER",
+                aggregation_strategy="simple"
+            )
+        except ImportError:
+            import subprocess
+            subprocess.check_call(["pip", "install", "transformers", "torch"])
+            from transformers import pipeline
+            ner_pipeline = pipeline(
+                "token-classification",
+                model="dslim/bert-base-NER",
+                aggregation_strategy="simple"
+            )
     return ner_pipeline
 
 

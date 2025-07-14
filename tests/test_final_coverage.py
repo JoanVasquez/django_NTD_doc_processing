@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from documents.extractor import get_ner_pipeline
 
 class FinalCoverageTest(TestCase):
-    @patch('documents.extractor.pipeline')
+    @patch('transformers.pipeline')
     def test_get_ner_pipeline_first_call(self, mock_pipeline_func):
         # Reset global variable
         import documents.extractor

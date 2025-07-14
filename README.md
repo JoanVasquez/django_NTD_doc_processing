@@ -26,22 +26,6 @@ CHROMA_DB_PORT=8000
 
 ## Quick Start
 
-### Using Docker (Recommended)
-
-1. **Clone and navigate to project**
-   ```bash
-   cd doc_processor
-   ```
-
-2. **Start the application**
-   ```bash
-   docker-compose up --build -d
-   ```
-
-3. **Access the API**
-   - API: http://localhost:8000/api/process-document/
-   - ChromaDB: http://localhost:8001
-
 ### Local Development
 
 1. **Install dependencies**
@@ -98,8 +82,6 @@ doc_processor/
 │   └── chroma_client.py   # Vector database client
 ├── docs-sm/               # Training data
 ├── tests/                 # Test files
-├── docker-compose.yml     # Docker orchestration
-├── Dockerfile            # Development container
 └── requirements.txt      # Python dependencies
 ```
 
@@ -113,36 +95,13 @@ pip install -r requirements.txt
 pip install -r requirements.dev.txt
 python -m pytest
 
-# Docker (containers must be running first)
-docker-compose up -d
-docker-compose exec web python -m pytest
 ```
-
-**Note**: For local testing, you don't need Docker containers running. For Docker testing, start containers first with `docker-compose up -d`.
 
 ### Adding New Document Types
 
 1. Add training data to `docs-sm/new_type/`
 2. Update `ENTITY_MAPPING` in `documents/extractor.py`
 3. Retrain the classifier model
-
-## Troubleshooting
-
-### Common Issues
-
-- **Permission errors**: Ensure Docker has proper file permissions
-- **Model loading slow**: First startup takes time to download ML models
-- **Empty entities**: Check OCR text quality and entity extraction patterns
-
-### Logs
-
-```bash
-# View application logs
-docker logs doc_processor_web
-
-# View ChromaDB logs  
-docker logs doc_processor_chromadb
-```
 
 ## Architecture Overview
 
@@ -224,7 +183,6 @@ Image Upload → OCR → Classification → Entity Extraction → Vector Storage
 - **Caching**: OCR results cached to avoid reprocessing
 - **Async-ready**: Django structure supports async processing
 - **Database**: ChromaDB handles large-scale vector operations
-- **Containerized**: Docker deployment for consistent environments
 
 ## Technology Stack
 
@@ -233,7 +191,6 @@ Image Upload → OCR → Classification → Entity Extraction → Vector Storage
 - **ML**: scikit-learn, Transformers, NLTK
 - **Vector DB**: ChromaDB
 - **Documentation**: Swagger/OpenAPI (drf-yasg)
-- **Containerization**: Docker, Docker Compose
 
 ## License
 
