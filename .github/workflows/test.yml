@@ -33,7 +33,6 @@ jobs:
           libglx-mesa0 \
           libglib2.0-0
 
-    
     - name: Run tests
       run: |
         python -m pytest --cov=. --cov-report=xml
