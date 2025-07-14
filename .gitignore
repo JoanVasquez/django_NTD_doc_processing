@@ -132,10 +132,7 @@ Thumbs.db
 /media/
 /static/
 /staticfiles/
-/ocr-cache/
-/app/ocr-cache/
-*.joblib
-model.joblib
+
 
 # Docker
 .dockerignore
